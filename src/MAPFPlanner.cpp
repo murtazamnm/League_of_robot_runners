@@ -34,7 +34,6 @@ void MAPFPlanner::initialize(int preprocess_time_limit) {
 void MAPFPlanner::plan(int time_limit,vector<Action> & actions) 
 {
     bool pp = true;
-    actions = std::vector<Action>(env->curr_states.size(), Action::W);
     vector<int> orders;
     orders.resize(env->num_of_agents);
     int max_constraint_time = 0;
@@ -46,6 +45,7 @@ void MAPFPlanner::plan(int time_limit,vector<Action> & actions)
         bool find_free_solution = false;
         while(!find_free_solution)
         {
+            actions = std::vector<Action>(env->curr_states.size(), Action::W);
             unordered_set<tuple<int,int,int>> reservation; //loc1,loc2,t
             for (int i = 0; i < env->num_of_agents; i++) 
             {
@@ -57,6 +57,7 @@ void MAPFPlanner::plan(int time_limit,vector<Action> & actions)
                     path.push_back({env->curr_states[i].location, env->curr_states[i].orientation});
                     reservation.emplace(make_tuple(env->curr_states[i].location,-1,1));
                 } 
+                reservation.emplace(make_tuple(env->curr_states[i].location,-1,0));
                 orders[i] = i;
             }
             auto seed = std::chrono::system_clock::now().time_since_epoch().count();

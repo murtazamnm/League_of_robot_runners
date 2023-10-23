@@ -18,17 +18,17 @@ PYBIND11_MODULE(MAPF, m ){
 
     pybind11::class_<Grid>(m, "Grid")
         .def(pybind11::init<std::string>())
-        .def_readonly("cols",&Grid::cols)
-        .def_readonly("map",&Grid::map)
-        .def_readonly("map_name",&Grid::map_name)
-        .def_readonly("rows",&Grid::rows);
+        .def_readwrite("cols",&Grid::cols)
+        .def_readwrite("map",&Grid::map)
+        .def_readwrite("map_name",&Grid::map_name)
+        .def_readwrite("rows",&Grid::rows);
 
 
     pybind11::class_<State>(m, "State")
         .def(pybind11::init<>())
-        .def_readonly("location",&State::location)
-        .def_readonly("timestep",&State::timestep)
-        .def_readonly("orientation",&State::orientation)
+        .def_readwrite("location",&State::location)
+        .def_readwrite("timestep",&State::timestep)
+        .def_readwrite("orientation",&State::orientation)
         .def(py::self==py::self)
         .def(py::self!=py::self)
         .def(pybind11::init<int,int,int>());
@@ -42,15 +42,15 @@ PYBIND11_MODULE(MAPF, m ){
 
     pybind11::class_<SharedEnvironment>(m,"SharedEnvironment")
         .def(pybind11::init<>())
-        .def_readonly("rows",&SharedEnvironment::rows)
-        .def_readonly("cols",&SharedEnvironment::cols)
-        .def_readonly("num_of_agents",&SharedEnvironment::num_of_agents)
-        .def_readonly("goal_locations",&SharedEnvironment::goal_locations)
-        .def_readonly("curr_timestep",&SharedEnvironment::curr_timestep)
-        .def_readonly("map",&SharedEnvironment::map)
-        .def_readonly("map_name",&SharedEnvironment::map_name)
-        .def_readonly("file_storage_path", &SharedEnvironment::file_storage_path)
-        .def_readonly("curr_states",&SharedEnvironment::curr_states);
+        .def_readwrite("rows",&SharedEnvironment::rows)
+        .def_readwrite("cols",&SharedEnvironment::cols)
+        .def_readwrite("num_of_agents",&SharedEnvironment::num_of_agents)
+        .def_readwrite("goal_locations",&SharedEnvironment::goal_locations)
+        .def_readwrite("curr_timestep",&SharedEnvironment::curr_timestep)
+        .def_readwrite("map",&SharedEnvironment::map)
+        .def_readwrite("map_name",&SharedEnvironment::map_name)
+        .def_readwrite("file_storage_path", &SharedEnvironment::file_storage_path)
+        .def_readwrite("curr_states",&SharedEnvironment::curr_states);
 
 
 
@@ -66,7 +66,7 @@ PYBIND11_MODULE(MAPF, m ){
         .def("get_goal_locations",&pyEnvironment::get_goal_locations)
         .def("get_num_of_agents",&pyEnvironment::get_num_of_agents)
         .def("get_file_storage_path", &pyEnvironment::get_file_storage_path)
-        .def_readonly("env",&pyEnvironment::env,pybind11::return_value_policy::reference)
+        .def_readwrite("env",&pyEnvironment::env,pybind11::return_value_policy::reference)
         .def("get_curr_states",&pyEnvironment::get_curr_states);
 
     

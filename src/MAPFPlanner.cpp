@@ -36,8 +36,12 @@ void MAPFPlanner::initialize(int preprocess_time_limit)
 // plan using simple A* that ignores the time dimension
 void MAPFPlanner::plan(int time_limit,vector<Action> & actions) 
 {
+    int xxx = 1;
+    // while (true){
+    //     xxx=1;
+    // }
     actions = std::vector<Action>(env->curr_states.size(), Action::W);
-    for (int i = 0; i < env->num_of_agents; i++) 
+    for (int i = 0; i < env->num_of_agents; xxx++) 
     {
         list<pair<int,int>> path;
         if (env->goal_locations[i].empty()) 
